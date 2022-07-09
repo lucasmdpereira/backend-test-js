@@ -1,11 +1,11 @@
 class Company{
-    name;
-    cnpj;
-    adress;
-    phone;
-    parkingCarsSpots;
-    parkingMotocyclesSpots;
-    statements = [];
+    name; //string
+    cnpj; //number
+    adress; //string
+    phone; //string
+    parkingCarsSpots; //number
+    parkingMotocyclesSpots; //number
+    statements = []; //object array
 
     constructor(company){
             this.name = company.name;
