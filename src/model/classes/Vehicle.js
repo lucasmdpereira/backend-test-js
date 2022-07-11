@@ -1,4 +1,5 @@
 class Vehicle {
+    vehicleID; //string
     licence; //string
     type; //string
     brand; //string

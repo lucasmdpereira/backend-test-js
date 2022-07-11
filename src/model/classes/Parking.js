@@ -1,4 +1,5 @@
 class Parking {
+    parkingID; //string
     alias; //string
     maxParkingCarsSpots; //number
     maxParkingMotocyclesSpots; //number
