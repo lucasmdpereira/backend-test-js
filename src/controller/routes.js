@@ -1,5 +1,7 @@
 import express from 'express';
 import { createCompany, readCompanies } from '../model/methods/company.js'
+import { createVehicle, readVehicles } from '../model/methods/vehicle.js'
+import { vehicleIn } from '../model/methods/parking_control.js'
 
 const routes = express.Router();
 
@@ -11,14 +13,33 @@ routes.get("/", (request, response) => {
 //Add company
 routes.post("/addcompany", (request, response) => {
     const { company: addcompany } = request.body;
-    createCompany(addcompany);
-    return response.status(201).json({date: new Date(), msg: "Empresa criada"});
+    createCompany(addcompany)
+    return response.status(201).json({date: new Date(), msg: "Empresa cadastrada"});
 })
 
 //List all company
 routes.get("/listcompanies", (request, response) => {
     const companies = readCompanies();
     return response.status(201).json(companies);
+})
+
+//Add vehicle
+routes.post("/addVehicle", (request, response) => {
+    const { vehicle: addvehicle} = request.body;
+    createVehicle(addvehicle);
+    return response.status(201).json({date: new Date(), msg: "Veículo cadastrado"});
+})
+
+//list all vehicles
+routes.get("/listvehicles", (request, response) => {
+    const vehicles = readVehicles();
+    return response.status(201).json(vehicles);
+})
+
+//vehicle entry
+routes.post("/vehicleIn", (request, response) => {
+    const { licence, companyName } = request.body;
+    vehicleIn(licence,companyName)
 })
 
 export { routes };

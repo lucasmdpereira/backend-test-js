@@ -1,4 +1,4 @@
-## Type
+   ## Type
 Must be one of the following:
 ```
 build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)

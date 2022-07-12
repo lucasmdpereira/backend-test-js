@@ -4,6 +4,8 @@ class Company{
     cnpj; //number
     adress; //string
     phone; //string
+    parkedCars = 0; //number
+    parkedMotocycles = 0; //number
     parkingCarsSpots; //number
     parkingMotocyclesSpots; //number
     statements = []; //object array
@@ -28,8 +30,16 @@ class Company{
         this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;
     }
 
+    setParkedCars(parkedCars){
+        this.parkedCars = parkedCars;
+    }
+    
     setStatements(statement){
         this.statements.push(statement);
+    }
+
+    getParkedCars(){
+        return this.parkedCars;
     }
 
     getCompany(){
@@ -43,10 +53,13 @@ class Company{
         }
     }
 
+    getParkingCarsSpots(){
+        return this.parkingCarsSpots;
+    }
+
     getStatement(){
         return this.statements[this.statements.length];
     }
-
 }
 
 export { Company }

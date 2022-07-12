@@ -12,6 +12,10 @@ function readCompanies(){
         return companies;
 }
 
-export { createCompany, readCompanies } 
+function vehicleIn(){
+        
+}
+
+export { companies, createCompany, readCompanies } 
 
 

@@ -14,6 +14,8 @@ class Vehicle {
         this.model = vehicle.model;
         this.color = vehicle.color;
 
-        this.statements.push(new Date() + ": Vehicle registered!")
-    }
+        this.statements.push({date: new Date(), msg: "Vehicle registered!"});
+        }
 }
+
+export { Vehicle }
