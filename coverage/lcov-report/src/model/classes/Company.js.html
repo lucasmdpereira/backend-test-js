@@ -160,6 +160,17 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -170,17 +181,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -214,45 +214,45 @@
             this.statements.push({date: new Date(), msg: "Company registered!"});
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    setCompany(company){</span>
-<span class="cstat-no" title="statement not covered" >        this.name = company.name;</span>
-<span class="cstat-no" title="statement not covered" >        this.adress = company.adress;</span>
-<span class="cstat-no" title="statement not covered" >        this.cnpj = company.cnpj;;</span>
-<span class="cstat-no" title="statement not covered" >        this.phone = company.phone;</span>
-<span class="cstat-no" title="statement not covered" >        this.parkingCarsSpots = company.parkingCarsSpots;</span>
-<span class="cstat-no" title="statement not covered" >        this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >    setParkedCars(parkedCars){</span>
-<span class="cstat-no" title="statement not covered" >        this.parkedCars = parkedCars;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >        setCompany(company){</span>
+<span class="cstat-no" title="statement not covered" >            this.name = company.name;</span>
+<span class="cstat-no" title="statement not covered" >            this.adress = company.adress;</span>
+<span class="cstat-no" title="statement not covered" >            this.cnpj = company.cnpj;;</span>
+<span class="cstat-no" title="statement not covered" >            this.phone = company.phone;</span>
+<span class="cstat-no" title="statement not covered" >            this.parkingCarsSpots = company.parkingCarsSpots;</span>
+<span class="cstat-no" title="statement not covered" >            this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
     
-<span class="fstat-no" title="function not covered" >    setStatements(statement){</span>
-<span class="cstat-no" title="statement not covered" >        this.statements.push(statement);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >    getParkedCars(){</span>
-<span class="cstat-no" title="statement not covered" >        return this.parkedCars;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-    getCompany(){
-        const company = {
-            name: this.name,
-            adress: this.adress,
-            cnpj: this.cnpj,
-            phone: this.phone,
-            parkingCarsSpots: this.parkingCarsSpots,
-            parkingMotocyclesSpots: this.parkingMotocyclesSpots,
+        getCompany(){
+            const company = {
+                name: this.name,
+                adress: this.adress,
+                cnpj: this.cnpj,
+                phone: this.phone,
+                parkingCarsSpots: this.parkingCarsSpots,
+                parkingMotocyclesSpots: this.parkingMotocyclesSpots,
+            }
         }
-    }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    getParkingCarsSpots(){</span>
-<span class="cstat-no" title="statement not covered" >        return this.parkingCarsSpots;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >            setParkedCars(parkedCars){</span>
+<span class="cstat-no" title="statement not covered" >                this.parkedCars = parkedCars;</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+    
+<span class="fstat-no" title="function not covered" >            setStatements(statement){</span>
+<span class="cstat-no" title="statement not covered" >                this.statements.push({date: new Date(), msg: statement});</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    getStatement(){</span>
-<span class="cstat-no" title="statement not covered" >        return this.statements[this.statements.length];</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >            getParkedCars(){</span>
+<span class="cstat-no" title="statement not covered" >                return this.parkedCars;</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >            getParkingCarsSpots(){</span>
+<span class="cstat-no" title="statement not covered" >                return this.parkingCarsSpots;</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >            getStatement(){</span>
+<span class="cstat-no" title="statement not covered" >                return this.statements[this.statements.length];</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
 }
 &nbsp;
 export { Company }</pre></td></tr></table></pre>
@@ -262,7 +262,7 @@ export { Company }</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jul 14 2022 13:45:43 GMT-0300 (Brasilia Standard Time)
+                at Thu Jul 14 2022 15:33:56 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

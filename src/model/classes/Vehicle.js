@@ -16,6 +16,18 @@ class Vehicle {
 
         this.statements.push({date: new Date(), msg: "Vehicle registered!"});
         }
+
+        getVehicle(){
+            const vehicle = {
+                licence: this.licence,
+                type: this.type,
+                brand: this.brand,
+                model: this.model,
+                color: this.color,
+                statements: this.statements,
+            }
+            return vehicle
+        }
 }
 
 export { Vehicle }

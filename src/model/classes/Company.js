@@ -21,45 +21,46 @@ class Company{
             this.statements.push({date: new Date(), msg: "Company registered!"});
     }
 
-    setCompany(company){
-        this.name = company.name;
-        this.adress = company.adress;
-        this.cnpj = company.cnpj;;
-        this.phone = company.phone;
-        this.parkingCarsSpots = company.parkingCarsSpots;
-        this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;
-    }
-
-    setParkedCars(parkedCars){
-        this.parkedCars = parkedCars;
-    }
-    
-    setStatements(statement){
-        this.statements.push({date: new Date(), msg: statement});
-    }
-
-    getParkedCars(){
-        return this.parkedCars;
-    }
-
-    getCompany(){
-        const company = {
-            name: this.name,
-            adress: this.adress,
-            cnpj: this.cnpj,
-            phone: this.phone,
-            parkingCarsSpots: this.parkingCarsSpots,
-            parkingMotocyclesSpots: this.parkingMotocyclesSpots,
+        setCompany(company){
+            this.name = company.name;
+            this.adress = company.adress;
+            this.cnpj = company.cnpj;;
+            this.phone = company.phone;
+            this.parkingCarsSpots = company.parkingCarsSpots;
+            this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;
         }
-    }
+    
+        getCompany(){
+            const company = {
+                name: this.name,
+                adress: this.adress,
+                cnpj: this.cnpj,
+                phone: this.phone,
+                parkingCarsSpots: this.parkingCarsSpots,
+                parkingMotocyclesSpots: this.parkingMotocyclesSpots,
+            }
+            return company
+        }
 
-    getParkingCarsSpots(){
-        return this.parkingCarsSpots;
-    }
+            setParkedCars(parkedCars){
+                this.parkedCars = parkedCars;
+            }
+    
+            setStatements(statement){
+                this.statements.push({date: new Date(), msg: statement});
+            }
 
-    getStatement(){
-        return this.statements[this.statements.length];
-    }
+            getParkedCars(){
+                return this.parkedCars;
+            }
+
+            getParkingCarsSpots(){
+                return this.parkingCarsSpots;
+            }
+
+            getStatement(){
+                return this.statements[this.statements.length];
+            }
 }
 
 export { Company }

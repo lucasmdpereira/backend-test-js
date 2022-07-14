@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">79.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/45</span>
+                <span class='fraction'>38/48</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">79.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/45</span>
+                <span class='fraction'>38/48</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,7 +108,10 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -143,46 +146,44 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
-import { createCompany, readCompanies } from '../model/methods/company.js'
-import { createVehicle, readVehicles } from '../model/methods/vehicle.js'
-import { vehicleIn } from '../model/methods/parking_control.js'
+import { addCompany, listCompanies } from '../model/methods/company.js'
+import { addVehicle, readVehicles } from '../model/methods/vehicle.js'
+import { vehicleIn, vehicleOut } from '../model/methods/parking_control.js'
+//import { vehicleIn } from '../model/methods/parking_control.js'
 &nbsp;
 const routes = express.Router();
-&nbsp;
 &nbsp;
 routes.get("/", (request, response) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return response.status(201).json({Hello: "World"})</span>
 <span class="cstat-no" title="statement not covered" >});</span>
 &nbsp;
-//Add company
 routes.post("/addcompany", (request, response) =&gt; {
-    const { company: addcompany } = request.body;
-    createCompany(addcompany)
-    return response.status(201).json({date: new Date(), msg: "Empresa cadastrada"});
+    const company = addCompany(request)
+    return response.status(201).json({date: new Date(), msg: "Empresa cadastrada", empresa: company});
 })
-&nbsp;
-//List all company
 routes.get("/listcompanies", (request, response) =&gt; {
-    const companies = readCompanies();
+    const companies = listCompanies();
     return response.status(201).json(companies);
 })
 &nbsp;
 //Add vehicle
 routes.post("/addVehicle", (request, response) =&gt; {
-    const { vehicle: addvehicle} = request.body;
-    createVehicle(addvehicle);
-    return response.status(201).json({date: new Date(), msg: "Veículo cadastrado"});
+    const vehicle = addVehicle(request);
+    return response.status(201).json({date: new Date(), msg: "Veículo cadastrado", veiculo:  vehicle});
 })
 &nbsp;
 //list all vehicles
@@ -194,8 +195,16 @@ routes.get("/listvehicles", (request, response) =&gt; {
 //vehicle entry
 routes.post("/vehicleIn", (request, response) =&gt; {
 <span class="cstat-no" title="statement not covered" >    const { licence, companyName } = request.body;</span>
-<span class="cstat-no" title="statement not covered" >    vehicleIn(licence,companyName)</span>
+<span class="cstat-no" title="statement not covered" >    const vehicleInResponse = vehicleIn(licence,companyName)</span>
+<span class="cstat-no" title="statement not covered" >    return response.status(201).json(vehicleInResponse)</span>
 <span class="cstat-no" title="statement not covered" >})</span>
+&nbsp;
+routes.post("/vehicleOut", (request, response) =&gt; {
+<span class="cstat-no" title="statement not covered" >    const { licence, companyName } = request.body;</span>
+<span class="cstat-no" title="statement not covered" >    const vehicleOutResponse = vehicleOut(licence,companyName)</span>
+<span class="cstat-no" title="statement not covered" >    return response.status(201).json(vehicleOutResponse)</span>
+<span class="cstat-no" title="statement not covered" >})</span>
+&nbsp;
 &nbsp;
 export { routes };
 &nbsp;</pre></td></tr></table></pre>
@@ -205,7 +214,7 @@ export { routes };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jul 14 2022 13:45:43 GMT-0300 (Brasilia Standard Time)
+                at Thu Jul 14 2022 15:33:56 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

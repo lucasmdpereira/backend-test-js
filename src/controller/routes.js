@@ -1,36 +1,28 @@
 import express from 'express';
-import { createCompany, readCompanies, vehicleIn, vehicleOut } from '../model/methods/company.js'
-import { createVehicle, readVehicles } from '../model/methods/vehicle.js'
+import { addCompany, listCompanies } from '../model/methods/company.js'
+import { addVehicle, readVehicles } from '../model/methods/vehicle.js'
+import { vehicleIn, vehicleOut } from '../model/methods/parking_control.js'
 //import { vehicleIn } from '../model/methods/parking_control.js'
 
 const routes = express.Router();
-
 
 routes.get("/", (request, response) => {
     return response.status(201).json({Hello: "World"})
 });
 
-//Add company
 routes.post("/addcompany", (request, response) => {
-    const { company: addcompany } = request.body;
-    createCompany(addcompany)
-    return response.status(201).json({date: new Date(), msg: "Empresa cadastrada"});
+    const company = addCompany(request)
+    return response.status(201).json({date: new Date(), msg: "Company registered!", company: company});
 })
-
-//List all company
 routes.get("/listcompanies", (request, response) => {
-    const companies = readCompanies();
+    const companies = listCompanies();
     return response.status(201).json(companies);
 })
 
-//Add vehicle
 routes.post("/addVehicle", (request, response) => {
-    const { vehicle: addvehicle} = request.body;
-    createVehicle(addvehicle);
-    return response.status(201).json({date: new Date(), msg: "Veículo cadastrado"});
+    const vehicle = addVehicle(request);
+    return response.status(201).json({date: new Date(), msg: "Vehicle registered!", vehicle:  vehicle});
 })
-
-//list all vehicles
 routes.get("/listvehicles", (request, response) => {
     const vehicles = readVehicles();
     return response.status(201).json(vehicles);
@@ -38,8 +30,7 @@ routes.get("/listvehicles", (request, response) => {
 
 //vehicle entry
 routes.post("/vehicleIn", (request, response) => {
-    const { licence, companyName } = request.body;
-    const vehicleInResponse = vehicleIn(licence,companyName)
+    const vehicleInResponse = vehicleIn(request)
     return response.status(201).json(vehicleInResponse)
 })
 
