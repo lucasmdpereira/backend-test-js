@@ -35,7 +35,7 @@ class Company{
     }
     
     setStatements(statement){
-        this.statements.push(statement);
+        this.statements.push({date: new Date(), msg: statement});
     }
 
     getParkedCars(){
