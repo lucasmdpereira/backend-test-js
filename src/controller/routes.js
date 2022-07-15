@@ -10,7 +10,7 @@ routes.get("/", (request, response) => {
 });
 
 routes.post("/addcompany", (request, response) => {
-    const company = addCompany(request)
+    const company = addCompany(request);
     return response.status(201).json({date: new Date(), msg: "Company registered!", company: company});
 })
 routes.get("/listcompanies", (request, response) => {
@@ -27,12 +27,12 @@ routes.get("/listvehicles", (request, response) => {
     return response.status(201).json(vehicles);
 })
 
-routes.post("/vehicleIn", (request, response) => {
-    const vehicleInResponse = vehicleIn(request)
+routes.post("/vehicleIn", async (request, response) =>  {
+    const vehicleInResponse = await vehicleIn(request);
     return response.status(201).json(vehicleInResponse)
 })
 routes.post("/vehicleOut", (request, response) => {
-    const vehicleOutResponse = vehicleOut(request)
+    const vehicleOutResponse = vehicleOut(request);
     return response.status(201).json(vehicleOutResponse)
 })
 

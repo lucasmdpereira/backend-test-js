@@ -28,6 +28,10 @@ class Vehicle {
             }
             return vehicle
         }
+
+        setStatements(statement){
+            this.statements.push({date: new Date(), msg: statement});
+        }
 }
 
 export { Vehicle }

@@ -5,9 +5,9 @@ class Company{
     adress; //string
     phone; //string
     parkedCars = 0; //number
-    parkedMotocycles = 0; //number
+    parkedMotorcycles = 0; //number
     parkingCarsSpots; //number
-    parkingMotocyclesSpots; //number
+    parkingMotorcyclesSpots; //number
     statements = []; //object array
 
     constructor(company){
@@ -16,7 +16,7 @@ class Company{
             this.adress = company.adress;
             this.phone = company.phone;
             this.parkingCarsSpots = company.parkingCarsSpots;
-            this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;
+            this.parkingMotorcyclesSpots = company.parkingMotorcyclesSpots;
             
             this.statements.push({date: new Date(), msg: "Company registered!"});
     }
@@ -27,7 +27,7 @@ class Company{
             this.cnpj = company.cnpj;;
             this.phone = company.phone;
             this.parkingCarsSpots = company.parkingCarsSpots;
-            this.parkingMotocyclesSpots = company.parkingMotocyclesSpots;
+            this.parkingMotorcyclesSpots = company.parkingMotorcyclesSpots;
         }
     
         getCompany(){
@@ -37,13 +37,17 @@ class Company{
                 cnpj: this.cnpj,
                 phone: this.phone,
                 parkingCarsSpots: this.parkingCarsSpots,
-                parkingMotocyclesSpots: this.parkingMotocyclesSpots,
+                parkingMotorcyclesSpots: this.parkingMotorcyclesSpots,
             }
             return company
         }
 
             setParkedCars(parkedCars){
                 this.parkedCars = parkedCars;
+            }
+
+            setParkedMotorcycles(parkedMotorcycles){
+                this.parkedMotorcycles = parkedMotorcycles;
             }
     
             setStatements(statement){
@@ -54,8 +58,16 @@ class Company{
                 return this.parkedCars;
             }
 
+            getParkedMotorcycles(){
+                return this.parkedMotorcycles;
+            }
+
             getParkingCarsSpots(){
                 return this.parkingCarsSpots;
+            }
+
+            getParkingMotorcyclesSpots(){
+                return this.parkingMotorcyclesSpots;
             }
 
             getStatement(){

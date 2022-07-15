@@ -15,23 +15,59 @@ function readVehicles(){
     return vehicles;
 }
 
-function vehicleIn(request){
+async function vehicleIn(request){
     const company = findCompanyInDataBase(request);
     const vehicle = findVehicleInDataBase(request);
-    
+
+    let leftSpots;
+    switch(vehicle.type){
+        case 'car':
+            leftSpots = await carIn(company);
+            break;
+        case 'motorcycle':
+            leftSpots = await motoIn(company);
+            break;
+        default:
+                // error
+            break;
+    }
+
+    if(leftSpots){
+        const statementCompany = `The ${vehicle.brand} ${vehicle.model} ${vehicle.color} with a licence ${vehicle.licence} has in`; //substituir por métodos: getbrand(), getmodel(), getcolor()
+        const statementVehicle = `Entered ${company.name} at ${company.adress}` //substituir por métodos: getbrand(), getmodel(), getcolor()
+        company.setStatements(statementCompany);
+        vehicle.setStatements(statementVehicle);
+        return `${statementCompany}. We have ${leftSpots} left spots`
+    }
+
+            
+    //return vehicleInResponse;
+}
+
+function carIn(company){
     const parkingCarsSpots = company.getParkingCarsSpots()
     let parkedCars = company.getParkedCars()
     let leftSpots = parkingCarsSpots - parkedCars
 
     if ( leftSpots > 0){
-        const statement = `The ${vehicle.brand} ${vehicle.model} ${vehicle.color} with a licence ${vehicle.licence} has in`
-        
-        company.setStatements(statement)
         company.setParkedCars(++parkedCars)
 
-        return `${statement}. We have ${--leftSpots} left spots`
-} else {
+        return --leftSpots
+    }
+}
+
+function motoIn(company){
+    const parkingMotorcyclesSpots = company.getParkingMotorcyclesSpots()
+    let parkedMotorcycles = company.getParkedMotorcycles()
+    let leftSpots = parkingMotorcyclesSpots - parkedMotorcycles
+
+    if ( leftSpots > 0){
+        company.setParkedMotorcycles(++parkedMotorcycles)
+
+        return --leftSpots
+    } else {
         // sem vagas
+    }
 }
 
 function vehicleOut(request){
@@ -47,6 +83,6 @@ let parkedCars = company.getParkedCars()
         return statement
 }
 
-}
+
 
 export { vehicles, addVehicle, readVehicles, vehicleIn } 
