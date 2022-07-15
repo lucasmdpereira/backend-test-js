@@ -1,8 +1,7 @@
 import express from 'express';
 import { addCompany, listCompanies } from '../model/methods/company.js'
-import { addVehicle, readVehicles } from '../model/methods/vehicle.js'
-import { vehicleIn, vehicleOut } from '../model/methods/parking_control.js'
-//import { vehicleIn } from '../model/methods/parking_control.js'
+import { addVehicle, readVehicles, vehicleIn } from '../model/methods/vehicle.js'
+import { vehicleOut } from '../model/methods/parking_control.js'
 
 const routes = express.Router();
 
@@ -28,17 +27,13 @@ routes.get("/listvehicles", (request, response) => {
     return response.status(201).json(vehicles);
 })
 
-//vehicle entry
 routes.post("/vehicleIn", (request, response) => {
     const vehicleInResponse = vehicleIn(request)
     return response.status(201).json(vehicleInResponse)
 })
-
 routes.post("/vehicleOut", (request, response) => {
-    const { licence, companyName } = request.body;
-    const vehicleOutResponse = vehicleOut(licence,companyName)
+    const vehicleOutResponse = vehicleOut(request)
     return response.status(201).json(vehicleOutResponse)
 })
-
 
 export { routes };

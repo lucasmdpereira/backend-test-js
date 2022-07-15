@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.16% </span>
+                <span class="strong">79.48% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/48</span>
+                <span class='fraction'>31/39</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.16% </span>
+                <span class="strong">79.48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/48</span>
+                <span class='fraction'>31/39</span>
             </div>
         
             
@@ -102,17 +102,7 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -142,28 +132,19 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
 import { addCompany, listCompanies } from '../model/methods/company.js'
-import { addVehicle, readVehicles } from '../model/methods/vehicle.js'
-import { vehicleIn, vehicleOut } from '../model/methods/parking_control.js'
-//import { vehicleIn } from '../model/methods/parking_control.js'
+import { addVehicle, readVehicles, vehicleIn } from '../model/methods/vehicle.js'
+import { vehicleOut } from '../model/methods/parking_control.js'
 &nbsp;
 const routes = express.Router();
 &nbsp;
@@ -173,38 +154,30 @@ routes.get("/", (request, response) =&gt; {
 &nbsp;
 routes.post("/addcompany", (request, response) =&gt; {
     const company = addCompany(request)
-    return response.status(201).json({date: new Date(), msg: "Empresa cadastrada", empresa: company});
+    return response.status(201).json({date: new Date(), msg: "Company registered!", company: company});
 })
 routes.get("/listcompanies", (request, response) =&gt; {
     const companies = listCompanies();
     return response.status(201).json(companies);
 })
 &nbsp;
-//Add vehicle
 routes.post("/addVehicle", (request, response) =&gt; {
     const vehicle = addVehicle(request);
-    return response.status(201).json({date: new Date(), msg: "Veículo cadastrado", veiculo:  vehicle});
+    return response.status(201).json({date: new Date(), msg: "Vehicle registered!", vehicle:  vehicle});
 })
-&nbsp;
-//list all vehicles
 routes.get("/listvehicles", (request, response) =&gt; {
     const vehicles = readVehicles();
     return response.status(201).json(vehicles);
 })
 &nbsp;
-//vehicle entry
 routes.post("/vehicleIn", (request, response) =&gt; {
-<span class="cstat-no" title="statement not covered" >    const { licence, companyName } = request.body;</span>
-<span class="cstat-no" title="statement not covered" >    const vehicleInResponse = vehicleIn(licence,companyName)</span>
+<span class="cstat-no" title="statement not covered" >    const vehicleInResponse = vehicleIn(request)</span>
 <span class="cstat-no" title="statement not covered" >    return response.status(201).json(vehicleInResponse)</span>
 <span class="cstat-no" title="statement not covered" >})</span>
-&nbsp;
 routes.post("/vehicleOut", (request, response) =&gt; {
-<span class="cstat-no" title="statement not covered" >    const { licence, companyName } = request.body;</span>
-<span class="cstat-no" title="statement not covered" >    const vehicleOutResponse = vehicleOut(licence,companyName)</span>
+<span class="cstat-no" title="statement not covered" >    const vehicleOutResponse = vehicleOut(request)</span>
 <span class="cstat-no" title="statement not covered" >    return response.status(201).json(vehicleOutResponse)</span>
 <span class="cstat-no" title="statement not covered" >})</span>
-&nbsp;
 &nbsp;
 export { routes };
 &nbsp;</pre></td></tr></table></pre>
@@ -214,7 +187,7 @@ export { routes };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jul 14 2022 15:33:56 GMT-0300 (Brasilia Standard Time)
+                at Fri Jul 15 2022 09:58:23 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

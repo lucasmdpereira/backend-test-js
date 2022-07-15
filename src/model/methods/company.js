@@ -1,7 +1,5 @@
 import { Company } from '../classes/Company.js'
-import { vehicles } from '../methods/vehicle.js'
-
-let companies = [];
+import { companies } from '../services/services.js'
 
 function addCompany(request){
         const { company: addcompany } = request.body;
