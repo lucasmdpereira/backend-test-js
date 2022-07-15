@@ -32,18 +32,16 @@ async function vehicleIn(request){
             break;
     }
 
-    if(leftSpots){
+    if(leftSpots > 0){
         const statementCompany = `The ${vehicle.brand} ${vehicle.model} ${vehicle.color} with a licence ${vehicle.licence} has in`; //substituir por métodos: getbrand(), getmodel(), getcolor()
         const statementVehicle = `Entered ${company.name} at ${company.adress}` //substituir por métodos: getbrand(), getmodel(), getcolor()
         company.setStatements(statementCompany);
         vehicle.setStatements(statementVehicle);
-        return `${statementCompany}. We have ${leftSpots} left spots`
+        return `${statementCompany}. We have ${--leftSpots} left spots`
+    } else {
+        return `Sorry. We have no left spots`
     }
-
-            
-    //return vehicleInResponse;
 }
-
 function carIn(company){
     const parkingCarsSpots = company.getParkingCarsSpots()
     let parkedCars = company.getParkedCars()
@@ -51,11 +49,9 @@ function carIn(company){
 
     if ( leftSpots > 0){
         company.setParkedCars(++parkedCars)
-
-        return --leftSpots
+        return leftSpots
     }
 }
-
 function motoIn(company){
     const parkingMotorcyclesSpots = company.getParkingMotorcyclesSpots()
     let parkedMotorcycles = company.getParkedMotorcycles()
@@ -63,26 +59,35 @@ function motoIn(company){
 
     if ( leftSpots > 0){
         company.setParkedMotorcycles(++parkedMotorcycles)
-
-        return --leftSpots
-    } else {
-        // sem vagas
+        return leftSpots
     }
 }
 
 function vehicleOut(request){
-    const { licence, companyName } = request.body;
-const company = companies.find(company => company.name == companyName);
-const vehicle = vehicles.find(vehicle => vehicle.licence == licence);
-let parkedCars = company.getParkedCars()          
-        parkedCars--;
-        const statement = `The ${vehicle.brand} ${vehicle.model} ${vehicle.color} with a licence ${vehicle.licence} has out`
-        company.setStatements(statement)
+    const company = findCompanyInDataBase(request);
+    const vehicle = findVehicleInDataBase(request);
 
-        
-        return statement
+    switch(vehicle.type){
+        case 'car':
+            company.parkedCars--
+            break;
+        case 'motorcycle':
+            company.parkedMotorcycles--
+            break;
+        default:
+                // error
+            break;
+    }
+
+    const statementCompany = `The ${vehicle.brand} ${vehicle.model} ${vehicle.color} with a licence ${vehicle.licence} has out`
+    const statementVehicle = `Left ${company.name} at ${company.adress}` //substituir por métodos: getbrand(), getmodel(), getcolor()
+
+
+    company.setStatements(statementCompany);
+    vehicle.setStatements(statementVehicle);
+      
 }
 
 
 
-export { vehicles, addVehicle, readVehicles, vehicleIn } 
+export { vehicles, addVehicle, readVehicles, vehicleIn, vehicleOut } 

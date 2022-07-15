@@ -1,7 +1,6 @@
 import express from 'express';
 import { addCompany, listCompanies } from '../model/methods/company.js'
-import { addVehicle, readVehicles, vehicleIn } from '../model/methods/vehicle.js'
-import { vehicleOut } from '../model/methods/parking_control.js'
+import { addVehicle, readVehicles, vehicleIn, vehicleOut } from '../model/methods/vehicle.js'
 
 const routes = express.Router();
 
