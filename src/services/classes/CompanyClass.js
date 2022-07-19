@@ -11,6 +11,7 @@ class Company{
     statements = []; //object array
 
     constructor(company){
+            this.companyID = company.companyID;
             this.name = company.name;
             this.cnpj = company.cnpj;
             this.adress = company.adress;
@@ -22,6 +23,7 @@ class Company{
     }
 
         setCompany(company){
+            this.companyID = company.companyID;
             this.name = company.name;
             this.adress = company.adress;
             this.cnpj = company.cnpj;;
@@ -32,6 +34,7 @@ class Company{
     
         getCompany(){
             const company = {
+                companyID: this.companyID,
                 name: this.name,
                 adress: this.adress,
                 cnpj: this.cnpj,

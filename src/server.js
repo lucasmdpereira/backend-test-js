@@ -1,12 +1,8 @@
 import express from 'express';
-import { routes } from './controller/routes.js';
+import { routes } from './routes.js'
 
-const app    = express();
-const port = 3000;
+const server = express();
+server.use(express.json())
+server.use(routes)
 
-app.use(express.json());
-app.use(routes)
-
-app.listen(port, () => console.log(`server running at port ${port}`));
-
-export { app }
+export { server }

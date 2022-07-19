@@ -42,6 +42,7 @@ async function vehicleIn(request){
         return `Sorry. We have no left spots`
     }
 }
+
 function carIn(company){
     const parkingCarsSpots = company.getParkingCarsSpots()
     let parkedCars = company.getParkedCars()
@@ -87,7 +88,5 @@ function vehicleOut(request){
     vehicle.setStatements(statementVehicle);
       
 }
-
-
 
 export { vehicles, addVehicle, readVehicles, vehicleIn, vehicleOut } 

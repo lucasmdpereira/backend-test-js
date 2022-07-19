@@ -1,12 +1,14 @@
 import express from 'express';
-import { addCompany, listCompanies } from '../model/methods/company.js'
-import { addVehicle, readVehicles, vehicleIn, vehicleOut } from '../model/methods/vehicle.js'
+import { addCompany, listCompanies } from './model/methods/company.js'
+import { addVehicle, readVehicles, vehicleIn, vehicleOut } from './model/methods/vehicle.js'
 
 const routes = express.Router();
 
 routes.get("/", (request, response) => {
     return response.status(201).json({Hello: "World"})
 });
+
+routes.post("/addcompany", CompanyControler.addCompany)
 
 routes.post("/addcompany", (request, response) => {
     const company = addCompany(request);

@@ -6,4 +6,3 @@ const dataBase = new Sequelize({
 })
 
 export { dataBase }
-
