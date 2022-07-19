@@ -1,5 +1,7 @@
+import { randomUUID } from 'crypto'
+
 class Company{
-    companyID; //string
+    companyID = randomUUID(); //string
     name; //string
     cnpj; //number
     adress; //string
@@ -11,7 +13,6 @@ class Company{
     statements = []; //object array
 
     constructor(company){
-            this.companyID = company.companyID;
             this.name = company.name;
             this.cnpj = company.cnpj;
             this.adress = company.adress;

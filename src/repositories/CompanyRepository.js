@@ -9,11 +9,14 @@ function addCompany(newCompany){
     return company
 }
 
-function findCompanyInDataBase(request){
-    const { companyName } = request.body;
-    const company = companies.find(company => company.name == companyName);
-
-    return company
+function listCompanies(){
+    return companies
 }
 
-export { addCompany, findCompanyInDataBase }
+function listCompany(query){
+        const company = companies.find(company => company.name == query || 
+                        company.cnpj == query || company.phone == query);
+        return company
+}
+
+export { addCompany, listCompanies, listCompany }
