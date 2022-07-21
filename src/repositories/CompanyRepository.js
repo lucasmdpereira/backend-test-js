@@ -1,16 +1,13 @@
-import { Company } from '../services/classes/CompanyClass.js'
 import { dataBase } from '../models/createDatabase.js';
 import { companyTable } from '../models/createTable.js'
 import { Op } from 'sequelize';
 
 
-let companies = [];
 
 async function addCompanyInDb(company){
-    companies.push(company)
-    console.log(company.companyID)
-    await dataBase.sync();
-    await companyTable.create({
+
+    const data = await dataBase.sync();
+    const table = await companyTable.create({
         companyID: company.companyID,
         name: company.name,
         cnpj: company.cnpj,
@@ -42,7 +39,7 @@ async function listCompaniesInDb(response){
 }
 
 async function searchCompanyInDb(query, response){
-        console.log(query)
+
         let company = await companyTable.findAll({
             where: {
                 [Op.or]:[
@@ -54,14 +51,11 @@ async function searchCompanyInDb(query, response){
             }
         })
 
+        if (company.length == 0) return response.status(404).json()
+
         company[0].statements = JSON.parse(company[0].statements)
+        return response.status(201).json(company[0])
 
-       // console.log(company[0])
-
-        response.company = company[0];
-
-        if(response.company) return response.status(201).json(response.company)
-        return response.status(404).json()
 }
 
 function changeCompanyInDb(companyID, companychanges, response){

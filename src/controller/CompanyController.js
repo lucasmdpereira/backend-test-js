@@ -2,9 +2,9 @@ import { addCompany, listCompanies, listCompany, changeCompany } from '../servic
 
 function createCompany(request, response){
     try{
-        let { company: newCompany } = request.body;
+        const { company: newCompany } = request.body;
         const company = addCompany(newCompany)
-        return response.status(201).json({company: company});
+        return response.status(201).json(company);
     } catch(error){
         return response.status(400).json(error)
     };
@@ -18,7 +18,6 @@ function readcompany(request, response){
     try{
         const query = request.params.query
         listCompany(query, response)
-        console.log(response)
         return response
     }
     catch(error){

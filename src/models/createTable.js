@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize'; 
+import  Sequelize  from 'sequelize'; 
 import { dataBase } from './createDatabase.js';
 
 const companyTable = dataBase.define('companies',{
@@ -47,7 +47,7 @@ const companyTable = dataBase.define('companies',{
         type: Sequelize.STRING,
     },
 })
-
+/*
 const vehicleTable = dataBase.define('vehicle',{
     //company table
     id: {
@@ -55,7 +55,8 @@ const vehicleTable = dataBase.define('vehicle',{
         allowNull: false,
         primaryKey: true
     },
-})
+    
+})*/
 
 
 
