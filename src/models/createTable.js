@@ -3,10 +3,48 @@ import { dataBase } from './createDatabase.js';
 
 const companyTable = dataBase.define('companies',{
     //company table
-    id: {
+    companyID: {
+        type: Sequelize.STRING,
+        //allowNull: false,
+        primaryKey: true,
+    },
+    name: {
+        type: Sequelize.STRING,
+        //allowNull: false,
+        unique: true,
+    },
+    cnpj: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true
+        //allowNull: false,
+        unique: true,
+    },
+    adress: {
+        type: Sequelize.STRING,
+        //allowNull: false,
+    },
+    phone: {
+        type: Sequelize.INTEGER,
+        //allowNull: false,
+        unique: true,
+    },
+    parkedCars: {
+        type: Sequelize.INTEGER,
+        //allowNull: false,
+    },
+    parkedMotorcycles: {
+        type: Sequelize.INTEGER,
+        //allowNull: false,
+    },
+    parkingCarsSpots: {
+        type: Sequelize.INTEGER,
+        //allowNull: false,
+    },
+    parkingMotorcyclesSpots: {
+        type: Sequelize.INTEGER,
+        //allowNull: false,
+    },
+    statements: {
+        type: Sequelize.STRING,
     },
 })
 
@@ -19,11 +57,6 @@ const vehicleTable = dataBase.define('vehicle',{
     },
 })
 
-async function create(){
-    const resultado = await dataBase.sync();
-    const insertData = await companyTable.create({
-        id: 0
-    })
-}
 
-create()
+
+export { companyTable }

@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "NODE_OPTIONS='--experimental-vm-modules' jest --forceExit",
-    "dbinit": "touch ./src/model/data/db.sqlite & sleep 2s & rm ./src/model/data/db.sqlite & node ./src/model/services/createTable.js" 
+    "test": "touch ./src/data/db.sqlite & sleep 2s & rm ./src/data/db.sqlite & NODE_OPTIONS='--experimental-vm-modules' jest --forceExit",
+    "dbinit": "touch ./src/data/db.sqlite & sleep 2s & rm ./src/data/db.sqlite & node ./src/seedData.js" 
   },
   "author": "",
   "license": "ISC",

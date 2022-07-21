@@ -1,17 +1,22 @@
-import { Company } from './classes/CompanyClass.js'
-import { companies } from '../repositories/services.js'
+import { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb } from '../repositories/CompanyRepository.js'
+import { Company } from '../services/classes/CompanyClass.js'
 
-function addCompany(request, response){
-        const { company: addcompany } = request.body;
-        const company = new Company(addcompany);
-        companies.push(company)
-        return response.status(201).json({date: new Date(), msg: "Company registered!", company: company.getCompany() });
+function addCompany(company){
+        const newCompany = new Company(company);
+        addCompanyInDb(newCompany);
+        return newCompany
 }
 
-function listCompanies(){
-        return companies;
+async function listCompanies(response){
+        return await listCompaniesInDb(response);
 }
 
-export { companies, addCompany, listCompanies } 
+function listCompany(query, response){
+        return searchCompanyInDb(query, response)
+}
 
+function changeCompany(query, companychanges, response){
+        changeCompanyInDb(query, companychanges, response)
+}
 
+export { addCompany, listCompanies, listCompany, changeCompany }

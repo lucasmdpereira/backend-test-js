@@ -1,36 +1,41 @@
-import { addCompany, listCompanies, listCompany } from '../repositories/CompanyRepository.js'
+import { addCompany, listCompanies, listCompany, changeCompany } from '../services/CompanyService.js'
 
 function createCompany(request, response){
     try{
-        let { company } = request.body;
-        company = addCompany(company)
-        return response.status(201).json({date: new Date(), msg: "Company registered!", company: company.getCompany() });
+        let { company: newCompany } = request.body;
+        const company = addCompany(newCompany)
+        return response.status(201).json({company: company});
     } catch(error){
         return response.status(400).json(error)
     };
 }
 
 function readcompanies(request, response){
-    try{
-        const companies = listCompanies();
-        if (companies.length > 0) return response.status(201).json(companies);
-        return response.status(404).json();
-    }
-    catch(error){
-        return response.status(400).json(error)
-    }
+        return listCompanies(response)
 }
 
 function readcompany(request, response){
     try{
-        const query = request.params.id
-        const company = listCompany(query)
-        if (company) return response.status(201).json(company);
-        return response.status(404).json();
+        const query = request.params.query
+        listCompany(query, response)
+        console.log(response)
+        return response
+    }
+    catch(error){
+        return response.status(404).json(error)
+    }
+}
+
+function updatecompany(request, response){
+    try{
+        let { company: companychanges } = request.body;
+        const query = request.params.query
+        const company = changeCompany(query, companychanges, response) 
+        return response.status(201).json(company)      
     }
     catch(error){
         return response.status(400).json(error)
     }
 }
 
-export { createCompany, readcompanies, readcompany }
+export { createCompany, readcompanies, readcompany, updatecompany }
