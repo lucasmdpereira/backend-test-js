@@ -59,7 +59,7 @@ async function searchCompanyInDb(query, response){
 
         company[0].statements = JSON.parse(company[0].statements);
         response.company = company[0].dataValues;
-        return response.status(200).json(response.company)
+        return response.status(302).json(response.company)
 
 }
 
@@ -82,7 +82,7 @@ async function changeCompanyInDb(companyID, companychanges, response){
         })
         await company.save();
         company = await companyTable.findByPk(companyID);
-        return response.status(200).json(company.dataValues)
+        return response.status(302).json(company.dataValues)
     }
     catch(error){
         return response.status(400).json()
