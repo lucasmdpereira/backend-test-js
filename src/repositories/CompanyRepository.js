@@ -31,7 +31,7 @@ async function listCompaniesInDb(response){
             companies[i] = listcompanies[i].dataValues
             companies[i].statements = JSON.parse(listcompanies[i].statements)
         }
-        return response.status(201).json(companies)
+        return response.status(301).json(companies)
     }
     catch(error){
         return response.status(404).json(error)
@@ -54,7 +54,7 @@ async function searchCompanyInDb(query, response){
         if (company.length == 0) return response.status(404).json()
 
         company[0].statements = JSON.parse(company[0].statements)
-        return response.status(201).json(company[0])
+        return response.status(301).json(company[0])
 
 }
 
