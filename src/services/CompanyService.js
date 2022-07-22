@@ -1,4 +1,4 @@
-import { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb } from '../repositories/CompanyRepository.js'
+import { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb, eraseCompanyInDb } from '../repositories/CompanyRepository.js'
 import { Company } from '../services/classes/CompanyClass.js'
 
 function addCompany(newCompany, response){
@@ -15,8 +15,8 @@ function listCompany(query, response){
 }
 
 async function changeCompany(query, companychanges, response){
-        await listCompany(query, response)
         try{
+                await listCompany(query, response)
                 const companyID = response.company.companyID
                 return await changeCompanyInDb(companyID, companychanges, response)
         }catch(error){
@@ -24,4 +24,14 @@ async function changeCompany(query, companychanges, response){
         }
 }
 
-export { addCompany, listCompanies, listCompany, changeCompany }
+async function eraseCompany(query, response){
+        try{
+                await listCompany(query, response)
+                const companyID = response.company.companyID
+                return await eraseCompanyInDb(companyID)
+        }catch(error){
+                return response.status(400).json()
+        }
+}
+
+export { addCompany, listCompanies, listCompany, changeCompany, eraseCompany }

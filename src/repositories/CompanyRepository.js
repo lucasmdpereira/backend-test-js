@@ -87,11 +87,16 @@ async function changeCompanyInDb(companyID, companychanges, response){
     catch(error){
         return response.status(400).json()
     }
-
-
-
-
-
 }
 
-export { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb }
+function eraseCompanyInDb(companyID){
+    try{
+        companyTable.destroy({ where: {companyID: companyID}})
+        response.status(200).json()
+    }
+    catch(error){
+        return response.status(400).json()
+    }
+}
+
+export { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb, eraseCompanyInDb }

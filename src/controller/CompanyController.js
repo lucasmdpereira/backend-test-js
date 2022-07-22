@@ -1,4 +1,4 @@
-import { addCompany, listCompanies, listCompany, changeCompany } from '../services/CompanyService.js'
+import { addCompany, listCompanies, listCompany, changeCompany, eraseCompany } from '../services/CompanyService.js'
 
 function createCompany(request, response){
     try{
@@ -35,4 +35,14 @@ function updatecompany(request, response){
     }
 }
 
-export { createCompany, readcompanies, readcompany, updatecompany }
+function deletecompany(request, response){
+    try{
+        const query = request.params.query
+        return eraseCompany(query, response)
+    }
+    catch(error){
+
+    }
+}
+
+export { createCompany, readcompanies, readcompany, updatecompany, deletecompany }
