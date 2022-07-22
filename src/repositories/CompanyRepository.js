@@ -4,23 +4,27 @@ import { Op } from 'sequelize';
 
 
 
-async function addCompanyInDb(company){
+async function addCompanyInDb(company, response){
 
-    const data = await dataBase.sync();
-    const table = await companyTable.create({
-        companyID: company.companyID,
-        name: company.name,
-        cnpj: company.cnpj,
-        adress: company.adress,
-        phone: company.phone,
-        parkedCars: 0,
-        parkedMotorcycles: 0,
-        parkingCarsSpots: 10,
-        parkingMotorcyclesSpots: company.parkingMotorcyclesSpots,
-        statements: JSON.stringify(company.statements),
-    })
+    try{
+        const data = await dataBase.sync();
+        const table = await companyTable.create({
+            companyID: company.companyID,
+            name: company.name,
+            cnpj: company.cnpj,
+            adress: company.adress,
+            phone: company.phone,
+            parkedCars: 0,
+            parkedMotorcycles: 0,
+            parkingCarsSpots: 10,
+            parkingMotorcyclesSpots: company.parkingMotorcyclesSpots,
+            statements: JSON.stringify(company.statements),
+        })
+        return response.status(201).json(company)
+    }catch(error){
+        return response.status(409).json("Company already registered!")
+    }
 
-    return company
 }
 
 async function listCompaniesInDb(response){
@@ -31,7 +35,7 @@ async function listCompaniesInDb(response){
             companies[i] = listcompanies[i].dataValues
             companies[i].statements = JSON.parse(listcompanies[i].statements)
         }
-        return response.status(301).json(companies)
+        return response.status(302).json(companies)
     }
     catch(error){
         return response.status(404).json(error)
@@ -53,24 +57,41 @@ async function searchCompanyInDb(query, response){
 
         if (company.length == 0) return response.status(404).json()
 
-        company[0].statements = JSON.parse(company[0].statements)
-        return response.status(301).json(company[0])
+        company[0].statements = JSON.parse(company[0].statements);
+        response.company = company[0].dataValues;
+        return response.status(200).json(response.company)
 
 }
 
-function changeCompanyInDb(companyID, companychanges, response){
-    /*
-    for (let i = 0; i < companies.length; i++){
-        if (companies[i].companyID == companyID){
-            setCompany
-        }
-    }
-    if (response.company){
-        
-        console.log(companies[0].companyID)
+async function changeCompanyInDb(companyID, companychanges, response){
+  
+    try{
+        let company = await companyTable.findByPk(companyID);
 
+        let statements = JSON.parse(company.dataValues.statements)
+        statements.push({date: new Date(), msg: "Company register changed!"});
+        
+        company.set({
+            name: companychanges.name,
+            cnpj: companychanges.cnpj,
+            adress: companychanges.adress,
+            phone: companychanges.phone,
+            parkingCarsSpots: companychanges.parkingCarsSpots,
+            parkingMotorcyclesSpots: companychanges.parkingMotorcyclesSpots,
+            statements: JSON.stringify(statements),
+        })
+        await company.save();
+        company = await companyTable.findByPk(companyID);
+        return response.status(200).json(company.dataValues)
     }
-    */
+    catch(error){
+        return response.status(400).json()
+    }
+
+
+
+
+
 }
 
 export { addCompanyInDb, listCompaniesInDb, searchCompanyInDb, changeCompanyInDb }

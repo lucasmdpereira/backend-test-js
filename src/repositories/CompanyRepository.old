@@ -1,0 +1,6 @@
+        company.dataValues.name = companychanges.name;
+        company.dataValues.cnpj = companychanges.cnpj;
+        company.dataValues.adress = companychanges.adress;
+        company.dataValues.phone = companychanges.phone;
+        company.dataValues.parkingCarsSpots = companychanges.parkingCarsSpots;
+        company.dataValues.parkingMotorcyclesSpots = companychanges.parkingMotorcyclesSpots;
