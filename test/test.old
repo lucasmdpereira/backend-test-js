@@ -1,0 +1,78 @@
+import {
+    expect,
+    test,
+    describe
+} from '@jest/globals'
+import superTest from 'supertest'
+import {app} from '../src/server.js'
+import { randonUUID } from 'crypto'
+
+
+const company = {
+    "company": {
+        "companyID": randonUUID,
+        "name": "nameTest",
+        "cnpj": 11111111111,
+        "adress": "adressTest",
+        "phone": 11111111111,
+        "parkingCarsSpots": 10,
+        "parkingMotocyclesSpots": 10
+        }
+}
+
+const vehicle = {
+    "vehicle": {
+        "vehilceID": randonUUID,
+        "licence": "placaTest",
+        "brand": "brandTest",
+        "model": "modelTest",
+        "color": "colorTest",
+        "type": "car"
+        }
+}
+
+describe('CRUD - CREATE => Create a company', () => {
+    test('POST /createcompany - should return "Company registered!" and all information', async () =>{
+        const response = await superTest(app)
+        .post('/addcompany').send(company)
+        const data = JSON.parse(response.text)
+        expect(data.msg).toBe("Company registered!")
+    })
+    test('GET /listcompanies - should return a array of objects', async () =>{
+        const response = await superTest(app)
+        .get('/listcompanies')
+        const data = JSON.parse(response.text)
+        expect(data).toBeInstanceOf(Array)
+        expect(data.length).toBeGreaterThan(0)
+    })
+})
+
+describe('Create a vehicle test', () => {
+    test('POST /addVehicle - should return "Vehicle registered!"', async () =>{
+        const response = await superTest(app)
+        .post('/addVehicle').send(vehicle)
+        const data = JSON.parse(response.text)
+        expect(data.msg).toBe("Vehicle registered!")
+    })
+    test('GET /listvehicles - should return a array of objects', async () =>{
+        const response = await superTest(app)
+        .get('/listvehicles')
+        const data = JSON.parse(response.text)
+        expect(data).toBeInstanceOf(Array)
+        expect(data.length).toBeGreaterThan(0)
+    })
+})
+
+
+        expect(typeof response.body.company.companyID).toBe("string") 
+        expect(typeof response.body.company.name).toBe("string") 
+        expect(typeof response.body.company.cnpj).toBe("number") 
+        expect(response.body.company.cnpj.toString().length).toBe(14) 
+        expect(typeof response.body.company.adress).toBe("string") 
+        expect(typeof response.body.company.phone).toBe("number") 
+        expect(response.body.company.phone.toString().length).toBeGreaterThanOrEqual(13) 
+        expect(response.body.company.phone.toString().length).toBeLessThanOrEqual(16) 
+        expect(typeof response.body.company.parkingCarsSpots).toBe("number") 
+        expect(response.body.company.parkingCarsSpots).toBeGreaterThanOrEqual(0) 
+        expect(typeof response.body.company.parkingMotorcyclesSpots).toBe("number") 
+        expect(response.body.company.parkingMotorcyclesSpots).toBeGreaterThanOrEqual(0)
